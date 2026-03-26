@@ -1771,11 +1771,24 @@ banner
 }
 
 .mil-inner-banner .mil-banner-content {
-  padding: 180px 0 120px 0;
+  padding: 180px 0 170px 0;
 }
 @media screen and (max-width: 1200px) {
   .mil-inner-banner .mil-banner-content {
-    padding: 160px 0 100px 0;
+    padding: 160px 0 140px 0;
+  }
+}
+.mil-inner-banner {
+  min-height: 72vh;
+}
+/* Inner banners are content-height sections, not full-viewport hero wrappers */
+.mil-inner-banner .mi-invert-fix {
+  height: auto;
+  min-height: inherit;
+}
+@media screen and (max-width: 992px) {
+  .mil-inner-banner {
+    min-height: 62vh;
   }
 }
 
