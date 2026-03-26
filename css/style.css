@@ -4494,6 +4494,12 @@ input::placeholder, textarea::placeholder {
   color: rgb(0, 0, 0) !important;
 }
 
+/* Keep heading line spacing consistent with hero style site-wide */
+h1, h2, h3, h4, h5, h6,
+.mil-h1, .mil-h2, .mil-h3, .mil-h4, .mil-h5, .mil-h6 {
+  line-height: 120% !important;
+}
+
 .mil-dark-bg p,
 .mil-dark-bg li,
 .mil-dark-bg .mil-muted,
