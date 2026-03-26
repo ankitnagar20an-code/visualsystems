@@ -38,11 +38,17 @@ $(function () {
         videos.forEach((video) => {
             video.muted = true;
             video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
             video.preload = 'auto';
             video.setAttribute('autoplay', 'autoplay');
             video.setAttribute('loop', 'loop');
             video.loop = true;
+            video.defaultPlaybackRate = 0.7;
             video.playbackRate = 0.7;
+            video.preservesPitch = false;
+            video.mozPreservesPitch = false;
+            video.webkitPreservesPitch = false;
 
             const startPlayback = () => {
                 const promise = video.play();

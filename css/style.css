@@ -1776,8 +1776,29 @@ banner
   position: relative;
 }
 @media screen and (max-width: 992px) {
+  .mil-banner .container {
+    align-items: flex-start;
+  }
   .mil-banner .mil-banner-content {
-    padding-bottom: 90px;
+    padding-top: 118px;
+    padding-bottom: 48px;
+  }
+  .mil-banner .mil-banner-content h1 {
+    margin-bottom: 30px !important;
+  }
+  .mil-banner .mil-banner-content p {
+    margin-bottom: 30px !important;
+  }
+  .mil-banner .mil-btn-space {
+    margin-right: 0;
+    margin-bottom: 14px;
+  }
+  .mil-banner .mil-link {
+    display: inline-flex;
+    align-items: center;
+  }
+  .mil-banner .mil-link svg {
+    margin-left: 12px;
   }
 }
 .mil-banner .mil-lines-place {
