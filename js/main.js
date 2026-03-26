@@ -181,6 +181,42 @@ $(function () {
 
     prepareSubscribeInputs(document);
 
+    function enforceMobileNavTransparent() {
+        const styleId = 'mil-mobile-nav-force-style';
+        const existing = document.getElementById(styleId);
+        if (window.innerWidth > 992) {
+            if (existing) existing.remove();
+            return;
+        }
+        if (!existing) {
+            const style = document.createElement('style');
+            style.id = styleId;
+            style.textContent = `
+@media screen and (max-width: 992px){
+  .mil-frame, .mil-frame-top, .mil-frame .mil-frame-top {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .mil-frame .mil-frame-top .mil-logo {
+    color: rgb(255,255,255) !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.22) !important;
+  }
+  .mil-frame .mil-frame-top .mil-menu-btn span,
+  .mil-frame .mil-frame-top .mil-menu-btn span:before,
+  .mil-frame .mil-frame-top .mil-menu-btn span:after {
+    background: rgb(255,255,255) !important;
+    box-shadow: 0 0 8px rgba(255,255,255,0.4) !important;
+  }
+}`;
+            document.head.appendChild(style);
+        }
+    }
+
+    enforceMobileNavTransparent();
+
     $(document).on('submit', '.mil-subscribe-form', function (event) {
         event.preventDefault();
 
@@ -730,6 +766,7 @@ $(function () {
         });
 
         prepareSubscribeInputs(document);
+        enforceMobileNavTransparent();
         /***************************
 
         accordion
