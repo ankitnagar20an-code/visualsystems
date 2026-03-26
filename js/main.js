@@ -33,108 +33,30 @@ $(function () {
     ***************************/
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    let milHeroVideoControllers = [];
-
-    function clearHeroVideoScrub() {
-        milHeroVideoControllers.forEach((controller) => {
-            try {
-                if (controller.trigger) controller.trigger.kill();
-            } catch (error) {}
-            try {
-                if (controller.state && controller.state.rafId) {
-                    cancelAnimationFrame(controller.state.rafId);
-                }
-            } catch (error) {}
-        });
-        milHeroVideoControllers = [];
-    }
-
     function initHeroVideoScrub() {
-        clearHeroVideoScrub();
-
-        const isMobile = window.matchMedia('(max-width: 992px)').matches;
         const videos = document.querySelectorAll('.mil-banner .mil-hero-video');
-
         videos.forEach((video) => {
-            const section = video.closest('.mil-banner');
-            if (!section) return;
-
             video.muted = true;
             video.playsInline = true;
             video.preload = 'auto';
+            video.setAttribute('autoplay', 'autoplay');
+            video.setAttribute('loop', 'loop');
+            video.loop = true;
+            video.playbackRate = 0.7;
 
-            if (isMobile) {
-                // Mobile: keep smooth slowed playback instead of scroll-scrub.
-                video.setAttribute('autoplay', 'autoplay');
-                video.setAttribute('loop', 'loop');
-                video.loop = true;
-                video.playbackRate = 0.5;
-
-                const playMobile = () => {
-                    const promise = video.play();
-                    if (promise && typeof promise.catch === 'function') {
-                        promise.catch(() => {});
-                    }
-                };
-
-                if (video.readyState >= 2) {
-                    playMobile();
-                } else {
-                    video.addEventListener('loadeddata', playMobile, { once: true });
+            const startPlayback = () => {
+                const promise = video.play();
+                if (promise && typeof promise.catch === 'function') {
+                    promise.catch(() => {});
                 }
-                return;
-            }
-
-            // Desktop: smooth scroll-driven timeline with dense virtual frames.
-            video.removeAttribute('autoplay');
-            video.removeAttribute('loop');
-            video.loop = false;
-            video.pause();
-
-            const setupScrollScrub = () => {
-                const duration = Math.max(0.1, video.duration || 0);
-                if (!duration || !isFinite(duration)) return;
-
-                const totalFrames = 600;
-                const state = {
-                    rafId: null,
-                    currentTime: 0,
-                    targetTime: 0
-                };
-
-                const tick = () => {
-                    state.currentTime += (state.targetTime - state.currentTime) * 0.14;
-                    if (Math.abs(video.currentTime - state.currentTime) > 0.001) {
-                        video.currentTime = state.currentTime;
-                    }
-                    state.rafId = requestAnimationFrame(tick);
-                };
-
-                tick();
-
-                const trigger = ScrollTrigger.create({
-                    trigger: section,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1.2,
-                    invalidateOnRefresh: true,
-                    onUpdate: (self) => {
-                        const frame = Math.round(self.progress * (totalFrames - 1));
-                        state.targetTime = (frame / (totalFrames - 1)) * duration;
-                    }
-                });
-
-                milHeroVideoControllers.push({ trigger: trigger, state: state });
             };
 
-            if (video.readyState >= 1) {
-                setupScrollScrub();
+            if (video.readyState >= 2) {
+                startPlayback();
             } else {
-                video.addEventListener('loadedmetadata', setupScrollScrub, { once: true });
+                video.addEventListener('loadeddata', startPlayback, { once: true });
             }
         });
-
-        ScrollTrigger.refresh();
     }
     /***************************
 
