@@ -95,7 +95,7 @@ $(function () {
                 const duration = Math.max(0.1, video.duration || 0);
                 if (!duration || !isFinite(duration)) return;
 
-                const totalFrames = 400;
+                const totalFrames = 600;
                 const state = {
                     rafId: null,
                     currentTime: 0,
@@ -115,7 +115,7 @@ $(function () {
                 const trigger = ScrollTrigger.create({
                     trigger: section,
                     start: 'top top',
-                    end: '+=260%',
+                    end: 'bottom top',
                     scrub: 1.2,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
@@ -323,7 +323,13 @@ $(function () {
   .mil-frame .mil-frame-top .mil-menu-btn span:before,
   .mil-frame .mil-frame-top .mil-menu-btn span:after {
     background: rgb(255,255,255) !important;
-    box-shadow: 0 0 8px rgba(255,255,255,0.4) !important;
+    box-shadow: none !important;
+  }
+  .mil-frame .mil-frame-top .mil-menu-btn {
+    mix-blend-mode: difference !important;
+  }
+  .mil-frame .mil-frame-top .mil-menu-btn.mil-active {
+    mix-blend-mode: normal !important;
   }
 }`;
             document.head.appendChild(style);
