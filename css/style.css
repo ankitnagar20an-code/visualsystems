@@ -1780,6 +1780,11 @@ banner
     align-items: flex-start;
   }
   .mil-banner .mil-banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mil-banner .mil-banner-content {
     padding-top: 118px;
     padding-bottom: 48px;
   }
@@ -1793,12 +1798,28 @@ banner
     margin-right: 0;
     margin-bottom: 14px;
   }
+  .mil-banner .mil-button {
+    height: 52px;
+    padding: 0 10px 0 22px;
+    align-self: flex-start;
+  }
+  .mil-banner .mil-button svg {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    margin-left: 14px;
+  }
   .mil-banner .mil-link {
     display: inline-flex;
     align-items: center;
+    align-self: flex-start;
+    margin-left: 0;
   }
   .mil-banner .mil-link svg {
-    margin-left: 12px;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    margin-left: 10px;
   }
 }
 .mil-banner .mil-lines-place {
