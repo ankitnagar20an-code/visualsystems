@@ -379,6 +379,7 @@ $(function () {
     });
 
     $('.mil-more').mouseover(function () {
+        $('.mil-ball').addClass('mil-hover-more');
         gsap.to($('.mil-ball .mil-more-text'), .2, {
             scale: '1',
             ease: 'sine',
@@ -386,6 +387,7 @@ $(function () {
     });
 
     $('.mil-more').mouseleave(function () {
+        $('.mil-ball').removeClass('mil-hover-more');
         gsap.to($('.mil-ball .mil-more-text'), .2, {
             scale: '0',
             ease: 'sine',
@@ -844,6 +846,7 @@ $(function () {
         });
 
         $('.mil-more').mouseover(function () {
+            $('.mil-ball').addClass('mil-hover-more');
             gsap.to($('.mil-ball .mil-more-text'), .2, {
                 scale: '1',
                 ease: 'sine',
@@ -851,6 +854,7 @@ $(function () {
         });
 
         $('.mil-more').mouseleave(function () {
+            $('.mil-ball').removeClass('mil-hover-more');
             gsap.to($('.mil-ball .mil-more-text'), .2, {
                 scale: '0',
                 ease: 'sine',
