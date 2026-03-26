@@ -1777,22 +1777,11 @@ banner
 }
 @media screen and (max-width: 992px) {
   .mil-banner .container {
-    align-items: flex-start;
+    align-items: flex-end;
   }
   .mil-banner .mil-banner-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .mil-banner .mil-banner-content {
-    padding-top: 118px;
-    padding-bottom: 48px;
-  }
-  .mil-banner .mil-banner-content h1 {
-    margin-bottom: 30px !important;
-  }
-  .mil-banner .mil-banner-content p {
-    margin-bottom: 30px !important;
+    padding-top: 0;
+    padding-bottom: 90px;
   }
   .mil-banner .mil-btn-space {
     margin-right: 0;
@@ -1817,8 +1806,9 @@ banner
     height: 52px;
     padding: 0 10px 0 22px;
     border-radius: 70px;
-    background: rgba(255, 255, 255, 0.12);
+    background: transparent;
     color: rgb(255, 255, 255) !important;
+    border: 1px solid transparent;
     text-decoration: none;
     line-height: 1;
   }
