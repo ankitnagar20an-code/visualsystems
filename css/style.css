@@ -1292,17 +1292,19 @@ frame
 @media screen and (max-width: 1200px) {
   .mil-frame .mil-frame-top {
     height: 90px;
-    background-color: rgba(43, 135, 189, 0.95);
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+    border-bottom: none;
     padding: 0 30px;
-    -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
   }
   .mil-frame .mil-frame-top .mil-logo {
     color: rgb(255, 255, 255);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   }
   .mil-frame .mil-frame-top .mil-menu-btn span, .mil-frame .mil-frame-top .mil-menu-btn span:after, .mil-frame .mil-frame-top .mil-menu-btn span:before {
     background: rgb(255, 255, 255);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
   }
 }
 .mil-frame .mil-frame-bottom {
