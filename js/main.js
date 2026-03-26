@@ -597,11 +597,37 @@ $(function () {
      menu
 
     ***************************/
+    function closeMenuFrame() {
+        $('.mil-menu-btn').removeClass('mil-active');
+        $('.mil-menu').removeClass('mil-active');
+        $('.mil-menu-frame').removeClass('mil-active');
+    }
+
+    function initMobileMenuBackButton() {
+        const menuFrame = document.querySelector('.mil-menu-frame');
+        if (!menuFrame) return;
+
+        let backBtn = menuFrame.querySelector('.mil-mobile-menu-back');
+        if (!backBtn) {
+            backBtn = document.createElement('button');
+            backBtn.type = 'button';
+            backBtn.className = 'mil-mobile-menu-back';
+            backBtn.setAttribute('aria-label', 'Back');
+            backBtn.innerHTML = '<span class="mil-mobile-menu-back-arrow">←</span><span>Back</span>';
+            menuFrame.appendChild(backBtn);
+        }
+
+        backBtn.onclick = function () {
+            closeMenuFrame();
+        };
+    }
+
     $('.mil-menu-btn').on("click", function () {
         $('.mil-menu-btn').toggleClass('mil-active');
         $('.mil-menu').toggleClass('mil-active');
         $('.mil-menu-frame').toggleClass('mil-active');
     });
+    initMobileMenuBackButton();
     /***************************
 
     main menu
@@ -867,6 +893,7 @@ $(function () {
         $('.mil-menu-btn').removeClass('mil-active');
         $('.mil-menu').removeClass('mil-active');
         $('.mil-menu-frame').removeClass('mil-active');
+        initMobileMenuBackButton();
         /***************************
 
         append

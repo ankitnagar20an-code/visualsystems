@@ -4614,3 +4614,36 @@ input::placeholder, textarea::placeholder {
 .mil-frame .mil-frame-bottom .mil-back-to-top {
   margin-left: auto;
 }
+
+/* Mobile menu back control */
+.mil-mobile-menu-back {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .mil-mobile-menu-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    top: 26px;
+    left: 18px;
+    z-index: 10001;
+    background: transparent;
+    border: 0;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.26);
+  }
+  .mil-mobile-menu-back .mil-mobile-menu-back-arrow {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .mil-menu-frame:not(.mil-active) .mil-mobile-menu-back {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
