@@ -1732,9 +1732,7 @@ banner
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.68;
-  /* Grade dark red footage toward brand-aligned dark blue */
-  filter: hue-rotate(168deg) saturate(1.45) brightness(0.58) contrast(1.1);
+  opacity: 1;
 }
 .mil-banner .mil-animation-frame {
   display: none;
@@ -1742,7 +1740,7 @@ banner
 .mil-banner.mil-dark-bg:before {
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
-  background: linear-gradient(140deg, rgba(45, 45, 77, 0.72) 0%, rgba(43, 135, 189, 0.32) 55%, rgba(45, 45, 77, 0.62) 100%);
+  background: rgba(0, 0, 0, 0.2);
 }
 .mil-banner .mil-gradient {
   display: none;
