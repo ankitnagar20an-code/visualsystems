@@ -32,6 +32,60 @@ $(function () {
 
     ***************************/
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+    let milHeroVideoScrollTriggers = [];
+
+    function clearHeroVideoScrub() {
+        milHeroVideoScrollTriggers.forEach((trigger) => {
+            try {
+                trigger.kill();
+            } catch (error) {}
+        });
+        milHeroVideoScrollTriggers = [];
+    }
+
+    function initHeroVideoScrub() {
+        clearHeroVideoScrub();
+
+        const videos = document.querySelectorAll('.mil-banner .mil-hero-video');
+        videos.forEach((video) => {
+            const section = video.closest('.mil-banner');
+            if (!section) return;
+
+            video.pause();
+            video.muted = true;
+            video.playsInline = true;
+
+            const setupScrollScrub = () => {
+                const duration = Math.max(0.1, video.duration || 0);
+                if (!duration || !isFinite(duration)) return;
+
+                const trigger = ScrollTrigger.create({
+                    trigger: section,
+                    start: 'top top',
+                    end: '+=180%',
+                    scrub: true,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        const targetTime = self.progress * duration;
+                        if (Math.abs(video.currentTime - targetTime) > 0.03) {
+                            video.currentTime = targetTime;
+                        }
+                    }
+                });
+
+                milHeroVideoScrollTriggers.push(trigger);
+            };
+
+            if (video.readyState >= 1) {
+                setupScrollScrub();
+            } else {
+                video.addEventListener('loadedmetadata', setupScrollScrub, { once: true });
+            }
+        });
+
+        ScrollTrigger.refresh();
+    }
     /***************************
 
     color variables
@@ -180,6 +234,7 @@ $(function () {
     }
 
     prepareSubscribeInputs(document);
+    initHeroVideoScrub();
 
     function enforceMobileNavTransparent() {
         const styleId = 'mil-mobile-nav-force-style';
@@ -767,6 +822,7 @@ $(function () {
 
         prepareSubscribeInputs(document);
         enforceMobileNavTransparent();
+        initHeroVideoScrub();
         /***************************
 
         accordion
