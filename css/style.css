@@ -1287,16 +1287,18 @@ frame
     padding: 0;
     z-index: 999;
     height: 90px;
+    background: transparent !important;
   }
 }
 @media screen and (max-width: 1200px) {
   .mil-frame .mil-frame-top {
     height: 90px;
-    background-color: transparent;
+    background-color: transparent !important;
     border-bottom: none;
     padding: 0 30px;
     -webkit-backdrop-filter: none;
             backdrop-filter: none;
+    box-shadow: none !important;
   }
   .mil-frame .mil-frame-top .mil-logo {
     color: rgb(255, 255, 255);
@@ -1786,6 +1788,11 @@ banner
 @media screen and (max-width: 1200px) {
   .mil-inner-banner .mil-banner-content {
     padding: 160px 0 140px 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .mil-inner-banner .mil-banner-content {
+    padding: 120px 0 130px 0;
   }
 }
 .mil-inner-banner {
