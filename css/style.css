@@ -1733,6 +1733,8 @@ banner
   z-index: 1;
   pointer-events: none;
   opacity: 0.68;
+  /* Grade dark red footage toward brand-aligned dark blue */
+  filter: hue-rotate(168deg) saturate(1.45) brightness(0.58) contrast(1.1);
 }
 .mil-banner .mil-animation-frame {
   display: none;
