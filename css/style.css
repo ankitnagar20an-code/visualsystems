@@ -4549,6 +4549,32 @@ input::placeholder, textarea::placeholder {
           animation: milPreloaderLogoAppear 900ms ease-out 120ms forwards;
 }
 
+/* Final mobile nav + inner-banner spacing overrides */
+@media screen and (max-width: 992px) {
+  .mil-frame,
+  .mil-frame-top,
+  .mil-frame .mil-frame-top {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+  .mil-frame .mil-frame-top .mil-logo {
+    color: rgb(255, 255, 255) !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.22) !important;
+  }
+  .mil-frame .mil-frame-top .mil-menu-btn span,
+  .mil-frame .mil-frame-top .mil-menu-btn span:before,
+  .mil-frame .mil-frame-top .mil-menu-btn span:after {
+    background: rgb(255, 255, 255) !important;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
+  }
+  .mil-inner-banner .mil-banner-content {
+    padding: 98px 0 125px 0 !important;
+  }
+}
+
 @-webkit-keyframes milPreloaderLogoAppear {
   from {
     opacity: 0;
