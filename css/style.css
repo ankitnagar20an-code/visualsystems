@@ -1724,6 +1724,16 @@ banner
 .mil-banner {
   height: 100vh;
 }
+.mil-banner .mil-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.52;
+}
 .mil-banner .container {
   height: 100%;
   display: -webkit-box;
@@ -4362,6 +4372,23 @@ input::placeholder, textarea::placeholder {
 
 .mil-main-transition .mil-breadcrumbs.mil-light li:last-child a {
   opacity: 0.85 !important;
+}
+
+.mil-subscribe-message {
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.mil-subscribe-message.mil-error {
+  color: rgb(45, 45, 77);
+}
+
+.mil-dark-bg .mil-subscribe-message {
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .mil-main-transition h1,

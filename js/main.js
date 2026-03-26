@@ -133,6 +133,86 @@ $(function () {
             scrollTop: target.offset().top - offset
         }, 400);
     });
+
+    /***************************
+
+    newsletter list (local persistent storage)
+
+    ***************************/
+    const MAILING_LIST_KEY = 'vs_mailing_list_v1';
+
+    function readMailingList() {
+        try {
+            const raw = localStorage.getItem(MAILING_LIST_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveMailingList(list) {
+        localStorage.setItem(MAILING_LIST_KEY, JSON.stringify(list));
+    }
+
+    function showSubscribeMessage(form, message, isError) {
+        let status = form.querySelector('.mil-subscribe-message');
+        if (!status) {
+            status = document.createElement('div');
+            status.className = 'mil-subscribe-message';
+            form.appendChild(status);
+        }
+        status.textContent = message;
+        status.classList.toggle('mil-error', !!isError);
+    }
+
+    function prepareSubscribeInputs(scope) {
+        const root = scope || document;
+        const forms = root.querySelectorAll('.mil-subscribe-form');
+        forms.forEach((form) => {
+            const input = form.querySelector('input[type="email"], input[type="text"], input:not([type])');
+            if (!input) return;
+            input.setAttribute('type', 'email');
+            input.setAttribute('name', 'email');
+            input.setAttribute('required', 'required');
+            input.setAttribute('autocomplete', 'email');
+            input.setAttribute('inputmode', 'email');
+        });
+    }
+
+    prepareSubscribeInputs(document);
+
+    $(document).on('submit', '.mil-subscribe-form', function (event) {
+        event.preventDefault();
+
+        const form = this;
+        const input = form.querySelector('input[type="email"], input[type="text"], input:not([type])');
+        if (!input) return;
+
+        const email = (input.value || '').trim().toLowerCase();
+        const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!emailIsValid) {
+            showSubscribeMessage(form, 'Please enter a valid email address.', true);
+            return;
+        }
+
+        const list = readMailingList();
+        const exists = list.some((entry) => entry.email === email);
+
+        if (exists) {
+            showSubscribeMessage(form, 'You are already on the mailing list.', false);
+            return;
+        }
+
+        list.push({
+            email: email,
+            subscribedAt: new Date().toISOString(),
+            sourcePage: window.location.pathname
+        });
+        saveMailingList(list);
+        form.reset();
+        showSubscribeMessage(form, 'You have been added to the mailing list.', false);
+    });
     /***************************
 
     append
@@ -646,6 +726,8 @@ $(function () {
             $(".mil-lines").clone().appendTo(".mil-lines-place");
             $(".mil-main-menu ul li.mil-active > a").clone().appendTo(".mil-current-page");
         });
+
+        prepareSubscribeInputs(document);
         /***************************
 
         accordion
