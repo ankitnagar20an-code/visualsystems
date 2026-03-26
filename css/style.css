@@ -1732,7 +1732,18 @@ banner
   object-fit: cover;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.52;
+  opacity: 0.68;
+}
+.mil-banner .mil-animation-frame {
+  display: none;
+}
+.mil-banner.mil-dark-bg:before {
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  background: linear-gradient(140deg, rgba(45, 45, 77, 0.72) 0%, rgba(43, 135, 189, 0.32) 55%, rgba(45, 45, 77, 0.62) 100%);
+}
+.mil-banner .mil-gradient {
+  display: none;
 }
 .mil-banner .container {
   height: 100%;
