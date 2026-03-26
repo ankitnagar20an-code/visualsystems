@@ -33,48 +33,98 @@ $(function () {
     ***************************/
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    let milHeroVideoScrollTriggers = [];
+    let milHeroVideoControllers = [];
 
     function clearHeroVideoScrub() {
-        milHeroVideoScrollTriggers.forEach((trigger) => {
+        milHeroVideoControllers.forEach((controller) => {
             try {
-                trigger.kill();
+                if (controller.trigger) controller.trigger.kill();
+            } catch (error) {}
+            try {
+                if (controller.state && controller.state.rafId) {
+                    cancelAnimationFrame(controller.state.rafId);
+                }
             } catch (error) {}
         });
-        milHeroVideoScrollTriggers = [];
+        milHeroVideoControllers = [];
     }
 
     function initHeroVideoScrub() {
         clearHeroVideoScrub();
 
+        const isMobile = window.matchMedia('(max-width: 992px)').matches;
         const videos = document.querySelectorAll('.mil-banner .mil-hero-video');
+
         videos.forEach((video) => {
             const section = video.closest('.mil-banner');
             if (!section) return;
 
-            video.pause();
             video.muted = true;
             video.playsInline = true;
+            video.preload = 'auto';
+
+            if (isMobile) {
+                // Mobile: keep smooth slowed playback instead of scroll-scrub.
+                video.setAttribute('autoplay', 'autoplay');
+                video.setAttribute('loop', 'loop');
+                video.loop = true;
+                video.playbackRate = 0.5;
+
+                const playMobile = () => {
+                    const promise = video.play();
+                    if (promise && typeof promise.catch === 'function') {
+                        promise.catch(() => {});
+                    }
+                };
+
+                if (video.readyState >= 2) {
+                    playMobile();
+                } else {
+                    video.addEventListener('loadeddata', playMobile, { once: true });
+                }
+                return;
+            }
+
+            // Desktop: smooth scroll-driven timeline with dense virtual frames.
+            video.removeAttribute('autoplay');
+            video.removeAttribute('loop');
+            video.loop = false;
+            video.pause();
 
             const setupScrollScrub = () => {
                 const duration = Math.max(0.1, video.duration || 0);
                 if (!duration || !isFinite(duration)) return;
 
+                const totalFrames = 400;
+                const state = {
+                    rafId: null,
+                    currentTime: 0,
+                    targetTime: 0
+                };
+
+                const tick = () => {
+                    state.currentTime += (state.targetTime - state.currentTime) * 0.14;
+                    if (Math.abs(video.currentTime - state.currentTime) > 0.001) {
+                        video.currentTime = state.currentTime;
+                    }
+                    state.rafId = requestAnimationFrame(tick);
+                };
+
+                tick();
+
                 const trigger = ScrollTrigger.create({
                     trigger: section,
                     start: 'top top',
-                    end: '+=180%',
-                    scrub: true,
+                    end: '+=260%',
+                    scrub: 1.2,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
-                        const targetTime = self.progress * duration;
-                        if (Math.abs(video.currentTime - targetTime) > 0.03) {
-                            video.currentTime = targetTime;
-                        }
+                        const frame = Math.round(self.progress * (totalFrames - 1));
+                        state.targetTime = (frame / (totalFrames - 1)) * duration;
                     }
                 });
 
-                milHeroVideoScrollTriggers.push(trigger);
+                milHeroVideoControllers.push({ trigger: trigger, state: state });
             };
 
             if (video.readyState >= 1) {
@@ -235,6 +285,16 @@ $(function () {
 
     prepareSubscribeInputs(document);
     initHeroVideoScrub();
+    if (!window.__milHeroVideoResizeBound) {
+        window.__milHeroVideoResizeBound = true;
+        let milHeroVideoResizeTimer = null;
+        window.addEventListener('resize', () => {
+            clearTimeout(milHeroVideoResizeTimer);
+            milHeroVideoResizeTimer = setTimeout(() => {
+                initHeroVideoScrub();
+            }, 160);
+        });
+    }
 
     function enforceMobileNavTransparent() {
         const styleId = 'mil-mobile-nav-force-style';
