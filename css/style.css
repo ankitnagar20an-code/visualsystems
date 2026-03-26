@@ -4350,6 +4350,20 @@ input::placeholder, textarea::placeholder {
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
+/* Keep breadcrumbs readable on dark hero/banner sections */
+.mil-main-transition .mil-breadcrumbs.mil-light li a {
+  color: rgba(255, 255, 255, 0.92) !important;
+  opacity: 1 !important;
+}
+
+.mil-main-transition .mil-breadcrumbs.mil-light li:after {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.mil-main-transition .mil-breadcrumbs.mil-light li:last-child a {
+  opacity: 0.85 !important;
+}
+
 .mil-main-transition h1,
 .mil-main-transition h2,
 .mil-main-transition h3,
