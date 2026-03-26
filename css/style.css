@@ -1380,6 +1380,10 @@ menu button
           align-items: center;
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  mix-blend-mode: difference;
+}
+.mil-menu-btn.mil-active {
+  mix-blend-mode: normal;
 }
 @media screen and (max-width: 992px) {
   .mil-menu-btn {
@@ -1393,7 +1397,7 @@ menu button
   width: 28px;
   height: 2.5px;
   background: rgb(255, 255, 255);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+  box-shadow: none;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   -webkit-transition: inherit;
@@ -4571,7 +4575,7 @@ input::placeholder, textarea::placeholder {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.4) !important;
   }
   .mil-inner-banner .mil-banner-content {
-    padding: 98px 0 125px 0 !important;
+    padding: 72px 0 120px 0 !important;
   }
 }
 
