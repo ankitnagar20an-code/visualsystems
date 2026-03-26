@@ -1773,11 +1773,11 @@ banner
 }
 
 .mil-inner-banner .mil-banner-content {
-  padding: 150px 0 0 0;
+  padding: 180px 0 120px 0;
 }
 @media screen and (max-width: 1200px) {
   .mil-inner-banner .mil-banner-content {
-    padding: 180px 0 0 0;
+    padding: 160px 0 100px 0;
   }
 }
 
@@ -4435,6 +4435,24 @@ input::placeholder, textarea::placeholder {
 .mil-menu-frame .mil-main-menu ul li a,
 .mil-menu-frame .mil-menu-list li a {
   color: rgba(255, 255, 255, 0.92) !important;
+}
+
+/* Keep dark-banner hero typography visible despite global text overrides */
+.mil-dark-bg h1,
+.mil-dark-bg h2,
+.mil-dark-bg h3,
+.mil-dark-bg h4,
+.mil-dark-bg h5,
+.mil-dark-bg h6,
+.mil-dark-bg .mil-h1,
+.mil-dark-bg .mil-h2,
+.mil-dark-bg .mil-h3,
+.mil-dark-bg .mil-h4,
+.mil-dark-bg .mil-h5,
+.mil-dark-bg .mil-h6,
+.mil-dark-bg .mil-banner-content .mil-muted,
+.mil-dark-bg .mil-banner-content .mil-thin {
+  color: rgba(255, 255, 255, 0.96) !important;
 }
 
 /* Control icon cleanup */
