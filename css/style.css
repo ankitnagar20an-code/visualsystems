@@ -518,6 +518,12 @@ link
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 12px;
+  line-height: 1;
+  vertical-align: middle;
+}
+.mil-link span {
+  display: inline-block;
+  line-height: 1.2;
 }
 .mil-link svg {
   margin-left: 15px;
@@ -525,6 +531,9 @@ link
   width: 40px;
   height: 40px;
   padding: 10px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   background-color: rgba(255, 255, 255, 0.1);
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
@@ -606,11 +615,14 @@ button
   height: 70px;
   text-transform: uppercase;
   font-weight: 500;
+  line-height: 1;
+  vertical-align: middle;
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
 }
 .mil-button span {
   white-space: nowrap;
+  line-height: 1.2;
 }
 .mil-button svg {
   margin-left: 30px;
@@ -618,6 +630,9 @@ button
   width: 40px;
   height: 40px;
   padding: 10px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
   background-color: rgb(255, 255, 255);
   -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
   transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
@@ -673,6 +688,9 @@ button
   }
   .mil-button svg {
     margin-left: 25px;
+  }
+  .mil-inner-banner .mil-link {
+    margin-top: 8px;
   }
 }
 
